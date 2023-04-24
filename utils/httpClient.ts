@@ -1,8 +1,33 @@
-import axios from "axios";
+import { getUserData } from "@/store/slices/userSlice";
+import { store } from "@/store/store";
+import axios, { AxiosError, AxiosInstance, AxiosResponse } from "axios";
 
-export const httpServerAPI = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_BASE_URL_SERVER_API,
-});
+function createAxiosInstance(): AxiosInstance {
+  const instance: AxiosInstance = axios.create({
+    baseURL: process.env.NEXT_PUBLIC_BASE_URL_SERVER_API,
+  });
+
+  let retried = false;
+  instance.interceptors.response.use(
+    (response: AxiosResponse) => {
+      return response;
+    },
+    async (error: AxiosError) => {
+      if (error.response?.status == 401) {
+        store.dispatch(getUserData());
+        if (!retried && error.config) {
+          retried = true;
+          return instance(error.config);
+        }
+      }
+      return Promise.reject(error);
+    }
+  );
+
+  return instance;
+}
+
+export const httpServerAPI = createAxiosInstance();
 
 export const httpLocalAPI = axios.create({
   baseURL: process.env.NEXT_PUBLIC_BASE_URL_LOCAL_API,
