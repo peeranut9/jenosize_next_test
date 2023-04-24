@@ -4,7 +4,6 @@ import Engagement from "./engagement";
 import { useSelector } from "react-redux";
 import { SelectedStatisticMenuSelector } from "@/store/slices/dashboardSlice";
 import Submission from "./submission";
-import { Box } from "@mui/material";
 
 export default function Statistic() {
   const selectedMenu = useSelector(SelectedStatisticMenuSelector);

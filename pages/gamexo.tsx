@@ -23,21 +23,19 @@ const GameXO = () => {
   const [refresh, setRefresh] = useState<boolean>(false);
   const [winner, setWinner] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
-  const authen = useSelector(isAuthenticatedSelector);
+
   useEffect(() => {
-    if (authen) {
-      setWinner(null);
-      setRefresh(false);
-      setBoard(null);
-      initBoard().then((response: string[][] | null) => {
-        if (response) {
-          setBoard(response);
-        } else {
-          setBoard([]);
-        }
-      });
-    }
-  }, [authen, refresh]);
+    setWinner(null);
+    setRefresh(false);
+    setBoard(null);
+    initBoard().then((response: string[][] | null) => {
+      if (response) {
+        setBoard(response);
+      } else {
+        setBoard([]);
+      }
+    });
+  }, [refresh]);
 
   return (
     <>
@@ -49,7 +47,11 @@ const GameXO = () => {
           <Button
             size="large"
             variant="contained"
-            className="bg-black hover:bg-gray-500 self-center"
+            className="hover:bg-gray-500 self-center"
+            style={{
+              backgroundColor: "black",
+              color: "white",
+            }}
             onClick={() => {
               setRefresh(true);
             }}
@@ -92,7 +94,11 @@ const GameXO = () => {
                   <Button
                     size="large"
                     variant="contained"
-                    className="bg-white text-black hover:text-white"
+                    className="hover:text-white"
+                    style={{
+                      backgroundColor: "white",
+                      color: "black",
+                    }}
                     onClick={() => {
                       setRefresh(true);
                     }}

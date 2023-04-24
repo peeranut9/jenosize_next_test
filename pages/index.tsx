@@ -26,14 +26,9 @@ const Home = () => {
             }}
             className="text-center"
             fullWidth
-            sx={{ boxShadow: 1, backgroundColor: "black" }}
+            style={{ backgroundColor: "black", color: "white" }}
           >
-            <Box
-              className="w-full text-sm font-semibold text-center"
-              color="white"
-            >
-              Signout
-            </Box>
+            Signout
           </Button>
         </div>
       </div>

@@ -1,7 +1,7 @@
 import {
-  SelectedDateMenuSelector,
+  SelectedDateTypeSelector,
   SelectedReportTypeSelector,
-  selectDateMenu,
+  selectDateType,
   selectReportType,
 } from "@/store/slices/dashboardSlice";
 import { useAppDispatch } from "@/store/store";
@@ -15,23 +15,24 @@ import IosShareIcon from "@mui/icons-material/IosShare";
 export default function DatePicker() {
   const theme = useTheme();
   const dispatch = useAppDispatch();
-  const selectedDate = useSelector(SelectedDateMenuSelector);
+  const selectedDate = useSelector(SelectedDateTypeSelector);
   const selectedReportType = useSelector(SelectedReportTypeSelector);
 
-  const StyledButton = styled(Button)(({ active }: { active: boolean }) => ({
+  const StyledButton = styled(Button)(({ active }: { active: string }) => ({
     textTransform: "none",
     borderRadius: 0,
-    color: active ? "black" : theme.palette.secondary.main,
-    borderBottom: active ? "solid 3px" : "solid 1px",
-    borderColor: active
-      ? theme.palette.primary.main
-      : theme.palette.secondary.main,
+    color: active == "true" ? "black" : theme.palette.secondary.main,
+    borderBottom: active == "true" ? "solid 3px" : "solid 1px",
+    borderColor:
+      active == "true"
+        ? theme.palette.primary.main
+        : theme.palette.secondary.main,
   }));
 
   return (
     <Box>
       <Box
-        className="flex pb-4"
+        className="flex h-16"
         sx={{
           borderBottom: "solid 1px",
           borderColor: theme.palette.secondary.main,
@@ -40,27 +41,27 @@ export default function DatePicker() {
         <Box className="flex grow px-2 sm:px-5">
           <StyledButton
             className="w-full h-11 align-middle font-bold text-xs"
-            active={selectedDate == 0}
+            active={(selectedDate == 0).toString()}
             onClick={() => {
-              dispatch(selectDateMenu(0));
+              dispatch(selectDateType(0));
             }}
           >
             Daily
           </StyledButton>
           <StyledButton
             className="w-full text-center h-11 align-middle font-bold text-xs"
-            active={selectedDate == 1}
+            active={(selectedDate == 1).toString()}
             onClick={() => {
-              dispatch(selectDateMenu(1));
+              dispatch(selectDateType(1));
             }}
           >
             Weekly
           </StyledButton>
           <StyledButton
             className="w-full text-center h-11 align-middle font-bold text-xs"
-            active={selectedDate == 2}
+            active={(selectedDate == 2).toString()}
             onClick={() => {
-              dispatch(selectDateMenu(2));
+              dispatch(selectDateType(2));
             }}
           >
             Monthly
@@ -93,8 +94,10 @@ export default function DatePicker() {
           </IconButton>
         </Box>
       </Box>
-      <Box className="flex pt-2 pl-4">
-        <Box className="self-center text-xs"> 18 December 2019</Box>
+      <Box className="flex pt-2 pl-6 pr-2 h-11">
+        <Box className="self-center text-xs">
+          {selectedDate == 0 ? "18 December 2019" : "10-16 December 2019"}
+        </Box>
         <Box className="text-xs ml-auto self-center">
           <IconButton
             size="small"

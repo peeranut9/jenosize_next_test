@@ -2,11 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  font-size: 14px;
+}
+
 .content-body {
   min-height: calc(100vh - 4rem - 4rem);
   display: flex;
   flex-direction: column;
 }
+
 .bottom-navigation {
   box-shadow: 0px -2px 8px rgba(0, 0, 0, 0.1);
   width: 100%;

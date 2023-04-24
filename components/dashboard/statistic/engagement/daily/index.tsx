@@ -1,28 +1,17 @@
-import { Box, Grid, styled, useTheme } from "@mui/material";
+import { Box, Grid } from "@mui/material";
 import React from "react";
 import ThumbUpOffAltIcon from "@mui/icons-material/ThumbUpOffAlt";
 import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline";
 import CardGiftcardIcon from "@mui/icons-material/CardGiftcard";
 import DiamondIcon from "@mui/icons-material/Diamond";
 import DailyItem from "./item";
+import Expanded from "@/components/expanded";
 
 export default function DialyReport() {
-  const theme = useTheme();
-  const StyledBox = styled(Box)({
-    justifyContent: "space-around",
-    alignItems: "center",
-    display: "flex",
-    flexDirection: "column",
-    border: "solid 2px",
-    width: "100%",
-    height: "100%",
-    borderColor: "#f1f1f1",
-    borderRadius: 10,
-  });
   return (
-    <Box flexGrow={1} className="h-100 px-4 py-4 flex flex-col mb-4">
-      <Grid flexGrow={1} className="h-100" container spacing={2}>
-        <Grid item xs={6} className="flex">
+    <Expanded className="px-4 py-4 mb-4">
+      <Grid flexGrow={1} className="h-full" container spacing={2}>
+        <Grid item xs={6}>
           <DailyItem
             icon={<ThumbUpOffAltIcon />}
             label="Like"
@@ -55,6 +44,6 @@ export default function DialyReport() {
           />
         </Grid>
       </Grid>
-    </Box>
+    </Expanded>
   );
 }

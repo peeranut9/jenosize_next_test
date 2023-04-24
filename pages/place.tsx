@@ -67,8 +67,9 @@ const Place = () => {
                         dispatch(queryNextPage(searchResult?.next_page_token!));
                       }}
                       size="large"
-                      sx={{
-                        px: "2rem",
+                      style={{
+                        paddingLeft: "2rem",
+                        paddingRight: "2rem",
                         backgroundColor: "black",
                         color: "white",
                         fontWeight: "bold",

@@ -13,17 +13,20 @@ export default function StatisticHeader() {
   const theme = useTheme();
   const selectedMenu = useSelector(SelectedStatisticMenuSelector);
 
-  const StyledButton = styled(Button)(({ active }: { active: boolean }) => ({
+  const StyledButton = styled(Button)(({ active }: { active: string }) => ({
     textTransform: "none",
     borderRadius: 0,
-    color: active ? theme.palette.primary.main : theme.palette.secondary.main,
+    color:
+      active == "true"
+        ? theme.palette.primary.main
+        : theme.palette.secondary.main,
   }));
 
   return (
-    <Box className="flex shadow-sm">
+    <Box className="flex shadow-sm h-11">
       <StyledButton
-        className="w-full text-center h-11 align-middle font-bold"
-        active={selectedMenu == 0}
+        className="w-full text-center align-middle font-bold"
+        active={(selectedMenu == 0).toString()}
         onClick={() => {
           dispatch(selectStatisticMenu(0));
         }}
@@ -32,8 +35,8 @@ export default function StatisticHeader() {
       </StyledButton>
       <Divider orientation="vertical" flexItem className="h-5 self-center" />
       <StyledButton
-        className="w-full text-center h-11 align-middle font-bold"
-        active={selectedMenu == 1}
+        className="w-full text-center align-middle font-bold"
+        active={(selectedMenu == 1).toString()}
         onClick={() => {
           dispatch(selectStatisticMenu(1));
         }}

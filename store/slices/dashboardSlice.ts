@@ -7,7 +7,7 @@ const dashboardSlice = createSlice({
     showBottomBar: false,
     selectedMenu: 3,
     selectedStatisticMenu: 1,
-    selectedDateMenu: 0,
+    selectedDateType: 0,
     selectedCategoryMenu: 0,
     selectedReportType: 0,
   },
@@ -18,8 +18,8 @@ const dashboardSlice = createSlice({
     selectStatisticMenu: (state, action) => {
       state.selectedStatisticMenu = action.payload;
     },
-    selectDateMenu: (state, action) => {
-      state.selectedDateMenu = action.payload;
+    selectDateType: (state, action) => {
+      state.selectedDateType = action.payload;
     },
     selectCategoryMenu: (state, action) => {
       state.selectedCategoryMenu = action.payload;
@@ -33,7 +33,7 @@ const dashboardSlice = createSlice({
 export const {
   selectMenu,
   selectStatisticMenu,
-  selectDateMenu,
+  selectDateType,
   selectCategoryMenu,
   selectReportType,
 } = dashboardSlice.actions;
@@ -42,8 +42,8 @@ export const SelectedMenuSelector = (store: RootState): number =>
   store.dashboard.selectedMenu;
 export const SelectedStatisticMenuSelector = (store: RootState): number =>
   store.dashboard.selectedStatisticMenu;
-export const SelectedDateMenuSelector = (store: RootState): number =>
-  store.dashboard.selectedDateMenu;
+export const SelectedDateTypeSelector = (store: RootState): number =>
+  store.dashboard.selectedDateType;
 export const SelectedCategoryMenuSelector = (store: RootState): number =>
   store.dashboard.selectedCategoryMenu;
 export const SelectedReportTypeSelector = (store: RootState): number =>
