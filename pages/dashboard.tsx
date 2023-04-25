@@ -7,8 +7,9 @@ import Approval from "@/components/dashboard/approval";
 import Report from "@/components/dashboard/report";
 import Statistic from "@/components/dashboard/statistic";
 import Setting from "@/components/dashboard/setting";
+import pageAuth from "@/components/pageAuth";
 
-export default function Dashboard() {
+const Dashboard = () => {
   const selectedMenu = useSelector(SelectedMenuSelector);
 
   let selectedComponent;
@@ -32,4 +33,6 @@ export default function Dashboard() {
       selectedComponent = <Write />;
   }
   return <Layout>{selectedComponent}</Layout>;
-}
+};
+
+export default pageAuth(Dashboard);

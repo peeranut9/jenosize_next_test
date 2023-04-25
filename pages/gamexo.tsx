@@ -11,6 +11,7 @@ import Header from "@/components/layout/place/header";
 import placeClass from "@/styles/place.module.css";
 import Footer from "@/components/layout/place/footer";
 import pageAuth from "@/components/pageAuth";
+import { useRouter } from "next/router";
 
 interface XOResult {
   board?: string[][];
@@ -23,6 +24,7 @@ const GameXO = () => {
   const [refresh, setRefresh] = useState<boolean>(false);
   const [winner, setWinner] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const router = useRouter();
 
   useEffect(() => {
     setWinner(null);
@@ -53,7 +55,7 @@ const GameXO = () => {
               color: "white",
             }}
             onClick={() => {
-              setRefresh(true);
+              router.reload();
             }}
           >
             {"Try Again"}
