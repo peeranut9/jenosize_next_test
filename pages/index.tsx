@@ -1,6 +1,6 @@
 import { Inter } from "next/font/google";
 import pageAuth from "@/components/pageAuth";
-import { Box, Button } from "@mui/material";
+import { Button } from "@mui/material";
 import { signOut, userSelector } from "@/store/slices/userSlice";
 import { useAppDispatch } from "@/store/store";
 import { useRouter } from "next/router";

@@ -77,7 +77,9 @@ export const signInWithFacebook = createAsyncThunk(
 
 export const getUserData = createAsyncThunk("user/getUserData", async () => {
   const response = await authService.getUserData();
-  setAPIToken(response);
+  if (response?.token) {
+    setAPIToken(response);
+  }
   return response;
 });
 
