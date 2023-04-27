@@ -12,6 +12,7 @@ import placeClass from "@/styles/place.module.css";
 import Footer from "@/components/layout/place/footer";
 import pageAuth from "@/components/pageAuth";
 import { useRouter } from "next/router";
+import useSWR from "swr";
 
 interface XOResult {
   board?: string[][];
@@ -19,25 +20,29 @@ interface XOResult {
   error?: string | null;
 }
 
+const fetchBoard = () => {
+  return initBoard().then((response: string[][] | null) => {
+    if (response) {
+      return response;
+    } else {
+      return [];
+    }
+  });
+};
+
 const GameXO = () => {
   const [board, setBoard] = useState<string[][] | null>(null);
   const [refresh, setRefresh] = useState<boolean>(false);
   const [winner, setWinner] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const router = useRouter();
+  const { data } = useSWR("board", fetchBoard);
 
   useEffect(() => {
     setWinner(null);
     setRefresh(false);
-    setBoard(null);
-    initBoard().then((response: string[][] | null) => {
-      if (response) {
-        setBoard(response);
-      } else {
-        setBoard([]);
-      }
-    });
-  }, [refresh]);
+    setBoard(data || null);
+  }, [data, refresh]);
 
   return (
     <>
